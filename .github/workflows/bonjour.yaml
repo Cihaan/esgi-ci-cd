@@ -3,7 +3,7 @@ on:
   - push
 jobs:
   dire_bonjour:
-    runs-on: docker/whalesay
+    runs-on: docker/whalesay:latest
     steps:
       - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - run: ls -l # Liste les fichier du répertoire courant
