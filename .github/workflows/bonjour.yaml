@@ -3,8 +3,9 @@ on:
   - push
 jobs:
   dire_bonjour:
-    runs-on: docker/whalesay:latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - run: ls -l # Liste les fichier du répertoire courant
-      - run: cat README.md | whalesay # Affiche le contenu du fichier `README.md` à la base du dépôt
+      - run: apt install cowsay -y
+      - run: cat README.md | cowsay # Affiche le contenu du fichier `README.md` à la base du dépôt
