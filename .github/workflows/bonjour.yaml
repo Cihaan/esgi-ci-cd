@@ -9,5 +9,5 @@ jobs:
       options: --user=root
     steps:
       - uses: actions/checkout@v4
-      - run: cd docker-git && npm clean-install
+      - run: cd node-app && npm clean-install
       - run: npm run lint
