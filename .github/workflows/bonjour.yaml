@@ -2,13 +2,8 @@
 name: Bonjour
 on:
   - push
+  - pull_request
 jobs:
-  lint_docker:
-    runs-on: hadolint/hadolint-action@v3.1.0
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
   dire_bonjour:
     runs-on: ubuntu-22.04
     env:
@@ -19,7 +14,5 @@ jobs:
         uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: ./node-app/Dockerfile
-      - name: Build Docker image
-        run: docker image build --tag="${IMAGE_NAME}" ./node-app/
-      - name: Run lint
-        run: docker container run --volume="${GITHUB_WORKSPACE}/node-app":"${GITHUB_WORKSPACE}/node-app" "${IMAGE_NAME}" npm run lint
+      - name: Lint JS
+        run: docker container run --volume="$(pwd)/node-app":/app "${IMAGE_NAME}" npm run lint
