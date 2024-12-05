@@ -11,5 +11,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build Docker image
         run: docker image build --tag="${IMAGE_NAME}" ./node-app/
+      - name: create file to lint
+        run: echo "console.log('HELLOWORLD');" > index.js
       - name: Run lint
         run: docker container run --volume="${GITHUB_WORKSPACE}/node-app":"${GITHUB_WORKSPACE}/node-app" --workdir="${GITHUB_WORKSPACE}/node-app" "${IMAGE_NAME}" npm run lint
