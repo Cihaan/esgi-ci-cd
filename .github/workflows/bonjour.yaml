@@ -5,9 +5,9 @@ on:
 jobs:
   lint_docker:
     runs-on: hadolint/hadolint-action@v3.1.0
-    with:
-      dockerfile: ./node-app/Dockerfile
-
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
   dire_bonjour:
     runs-on: ubuntu-22.04
@@ -15,6 +15,10 @@ jobs:
       IMAGE_NAME: "node-app-de-omar"
     steps:
       - uses: actions/checkout@v4
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: ./node-app/Dockerfile
       - name: Build Docker image
         run: docker image build --tag="${IMAGE_NAME}" ./node-app/
       - name: Run lint
