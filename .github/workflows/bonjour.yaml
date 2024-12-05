@@ -1,18 +1,13 @@
-# bonjour.yml
 name: Bonjour
 on:
   - push
-  - pull_request
 jobs:
   dire_bonjour:
     runs-on: ubuntu-22.04
     env:
-      IMAGE_NAME: "node-app-de-omar"
+      IMAGE_NAME: "mynode"
     steps:
-      - uses: actions/checkout@v4
-      # - name: Lint Dockerfile
-      #   uses: hadolint/hadolint-action@v3.1.0
-      #   with:
-      #     dockerfile: ./node-app/Dockerfile
-      - name: Lint JS
-        run: docker container run --volume="$(pwd)/node-app":/app "${IMAGE_NAME}" npm run lint
+      - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
+      - run: docker image build --tag="${IMAGE_NAME}" ./
+      - run: docker container run "${IMAGE_NAME}" npm run lint
+      - run: docker container run --volume="$(pwd)":/app "${IMAGE_NAME}" npm run lint
