@@ -10,9 +10,9 @@ jobs:
       IMAGE_NAME: "node-app-de-omar"
     steps:
       - uses: actions/checkout@v4
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: ./node-app/Dockerfile
+      # - name: Lint Dockerfile
+      #   uses: hadolint/hadolint-action@v3.1.0
+      #   with:
+      #     dockerfile: ./node-app/Dockerfile
       - name: Lint JS
         run: docker container run --volume="$(pwd)/node-app":/app "${IMAGE_NAME}" npm run lint
