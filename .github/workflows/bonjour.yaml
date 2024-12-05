@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       IMAGE_NAME: "node-app-de-omar"
-      CHEMIN: "./node-app"
+      CHEMIN: ${{ github.workspace }}
     steps:
       - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - run: docker image build --tag="${IMAGE_NAME}" ./node-app/
