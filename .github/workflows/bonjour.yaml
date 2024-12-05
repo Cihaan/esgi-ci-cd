@@ -14,5 +14,4 @@ jobs:
       - name: create file to lint
         run: echo "console.log('HELLOWORLD');" > index.js
       - name: Run lint
-        run: docker container run --workdir="/app" "${IMAGE_NAME}" npm run lint
-        # --volume="${GITHUB_WORKSPACE}/node-app":"${GITHUB_WORKSPACE}/app" 
+        run: docker container run --volume="${GITHUB_WORKSPACE}/node-app":"${GITHUB_WORKSPACE}/node-app" --workdir="/app" "${IMAGE_NAME}" npm run lint
