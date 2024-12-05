@@ -1,5 +1,6 @@
 FROM node:23
-
-COPY ./package.json /node-app/
-COPY ./package-lock.json /node-app/
-RUN npm ci
+WORKDIR /app
+COPY ./package.json /app/
+COPY ./package-lock.json /app/
+RUN npm clean-install
+COPY ./index.js /app/
