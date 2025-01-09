@@ -6,8 +6,9 @@ jobs:
   dire_bonjour:
     runs-on: ubuntu-22.04
     env:
-      IMAGE_NAME: "mynode"
+      IMAGE_NAME: "cihaaan"
     steps:
-      - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
-      - run: docker image build --tag="${IMAGE_NAME}" ./
-      - run: docker container run --volume="$(pwd)":"$(pwd)" --workdir="$(pwd)" "${IMAGE_NAME}" npm run lint
+      - uses: actions/checkout@v4
+      - run: docker image build --tag="${IMAGE_NAME}/${IMAGE_VERSION}" ./
+      - run: docker login -u cihaaan -p ${DOCKER_TOKEN}
+      - run: docker image push "${IMAGE_NAME}/${IMAGE_VERSION}"
